@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twitter / X Hashtag Generator — Free</title>
+<meta name="description" content="Generate short, conversation-friendly hashtags for X (Twitter).">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;color:#1f2937;background:#f8fafc;line-height:1.6}
+a{color:#7c3aed;text-decoration:none}
+a:hover{text-decoration:underline}
+header{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.logo{font-size:22px;font-weight:800;color:#7c3aed}
+nav a{margin-left:16px;color:#374151;font-weight:600}
+.container{max-width:1100px;margin:0 auto;padding:20px}
+.hero{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;padding:34px 24px;border-radius:12px;margin-bottom:20px}
+.hero h1{font-size:30px;margin-bottom:8px}
+.layout{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+@media(max-width:820px){.layout{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin-bottom:20px}
+.card h2{font-size:20px;margin-bottom:10px}
+label{display:block;font-weight:700;margin:12px 0 4px}
+input[type=text],textarea,select{width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;font-family:inherit}
+textarea{min-height:90px;resize:vertical}
+button{background:#7c3aed;color:#fff;border:none;padding:11px 18px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;margin-top:12px}
+button:hover{background:#6d28d9}
+button.secondary{background:#fff;color:#7c3aed;border:1px solid #7c3aed}
+.tagbox{background:#f5f3ff;border:1px solid #ddd6fe;border-radius:8px;padding:12px;margin-top:12px}
+.tagbox h3{font-size:15px;margin-bottom:6px}
+.tag{display:inline-block;background:#ede9fe;color:#5b21b6;padding:4px 10px;border-radius:20px;margin:3px;font-size:14px;cursor:pointer}
+.tag:hover{background:#ddd6fe}
+.copybtn{padding:5px 10px;font-size:13px;margin:6px 0 0}
+.result{background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:12px;margin-top:12px;white-space:pre-wrap;word-break:break-word;font-family:monospace;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.article-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden}
+.article-card img{width:100%;height:150px;object-fit:cover;display:block}
+.article-card .body{padding:14px}
+.article-card h3{font-size:16px;margin-bottom:6px}
+.article-card p{font-size:14px;color:#4b5563}
+.tools-list a{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px;margin-bottom:10px;font-weight:700;color:#1f2937}
+.tools-list a span{display:block;font-weight:400;color:#6b7280;font-size:14px}
+footer{background:#111827;color:#9ca3af;padding:24px 20px;text-align:center;margin-top:30px}
+footer a{color:#c4b5fd;margin:0 10px}
+.faq h3{font-size:16px;margin-top:12px}
+.heroimg{width:100%;border-radius:12px;margin-bottom:16px}
+.muted{color:#6b7280;font-size:14px}
+</style>
+
+</head>
+<body>
+<header><a class="logo" href="/"># HashtagGenerator</a><nav><a href="/">Home</a><a href="/tools/instagram-hashtag-generator.html">Instagram</a><a href="/tools/tiktok-hashtag-generator.html">TikTok</a><a href="/tools/hashtag-counter.html">Counter</a><a href="/about.html">About</a></nav></header>
+<div class="container">
+<div class="card"><h1>Twitter / X Hashtag Generator</h1><p>Enter a topic and get short hashtags for X. One or two tags per post is usually enough — more than that hurts readability.</p><label for="x-topic">Topic or keyword</label><input type="text" id="x-topic" placeholder="e.g. marketing, football, AI news">
+<button onclick="renderGroups(gen(document.getElementById('x-topic').value||'twitter','twitter'),document.getElementById('x-out'))">Generate X Hashtags</button>
+<div id="x-out"></div>
+<script>
+const POPULAR={fitness:['fitness','gym','workout','fit','health','gymlife','training','fitfam','exercise','wellness'],food:['food','foodie','foodporn','instafood','delicious','yummy','cooking','recipe','foodblogger','homemade'],travel:['travel','wanderlust','travelgram','adventure','explore','vacation','nature','photography','trip','tourism'],fashion:['fashion','style','ootd','fashionblogger','outfit','trendy','shopping','beauty','streetstyle','model'],tech:['tech','technology','innovation','ai','gadgets','coding','software','startup','digital','future'],business:['business','entrepreneur','marketing','smallbusiness','success','motivation','branding','startup','leadership','growth'],photography:['photography','photooftheday','photographer','instagood','photo','art','portrait','landscape','creative','camera'],music:['music','musician','song','singer','concert','band','guitar','spotify','newmusic','dj']};
+function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'').replace(/\s+/g,'');}
+function gen(topic,platform){
+  const key=Object.keys(POPULAR).find(k=>topic.toLowerCase().includes(k))||'business';
+  const base=slug(topic)||'topic';
+  const popular=POPULAR[key].slice(0,8);
+  const niche=[base+'tips',base+'daily','best'+base,base+'community',base+'lovers','daily'+base,base+'life','real'+base];
+  const branded=[base+'official','my'+base,base+'club','team'+base,base+'2026','weare'+base];
+  const counts={instagram:10,tiktok:6,twitter:3,general:8};
+  const n=counts[platform]||8;
+  return {popular:popular.slice(0,n),niche:niche.slice(0,6),branded:branded.slice(0,4)};
+}
+function renderGroups(g,el){
+  el.innerHTML='';
+  for(const [label,tags] of Object.entries(g)){
+    const div=document.createElement('div');div.className='tagbox';
+    div.innerHTML='<h3>'+label.charAt(0).toUpperCase()+label.slice(1)+' hashtags</h3>';
+    tags.forEach(t=>{const s=document.createElement('span');s.className='tag';s.textContent='#'+t;s.title='Click to copy';s.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText('#'+t);s.textContent='Copied!';setTimeout(()=>s.textContent='#'+t,900);};div.appendChild(s);});
+    const b=document.createElement('button');b.className='copybtn';b.textContent='Copy '+label+' group';
+    b.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(tags.map(t=>'#'+t).join(' '));b.textContent='Copied!';setTimeout(()=>b.textContent='Copy '+label+' group',1200);};
+    div.appendChild(document.createElement('br'));div.appendChild(b);
+    el.appendChild(div);
+  }
+}
+</script>
+<p class="muted" style="margin-top:14px">Note: suggestions come from built-in lists, not a live X API. Check whether a tag is tied to an active conversation before joining it.</p></div>
+<div class="card"><h2>More hashtag tools</h2><div class="tools-list">
+<a href="/">Hashtag Generator <span>Generate popular, niche, and branded hashtags for any topic.</span></a>
+<a href="/tools/instagram-hashtag-generator.html">Instagram Hashtag Generator <span>Tags tuned for Instagram posts, Reels, and Stories.</span></a>
+<a href="/tools/tiktok-hashtag-generator.html">TikTok Hashtag Generator <span>Discovery tags for the TikTok For You feed.</span></a>
+<a href="/tools/twitter-hashtag-generator.html">Twitter / X Hashtag Generator <span>Short, conversation-friendly tags for X.</span></a>
+<a href="/tools/hashtag-counter.html">Hashtag Counter <span>Count hashtags in pasted text and check lengths.</span></a>
+</div></div>
+</div>
+<footer><p>HashtagGenerator — free hashtag tools for creators and small businesses.</p><p><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy Policy</a><a href="/disclaimer.html">Disclaimer</a></p></footer>
+</body>
+</html>
