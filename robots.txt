@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hashtaggenerator.github.io/sitemap.xml
